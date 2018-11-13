@@ -1,0 +1,110 @@
+body {
+    background: black;
+    color: #bbb;
+    text-align: center;
+    font-family: sans-serif;
+    margin-top: 2%;
+    font-size: 0.7em;
+}
+
+body > div {
+    width: 100%;
+    text-align: center;
+}
+
+body ul {
+    text-align: left;
+}
+
+body #description {
+    max-width: 600px;
+    margin: 0 auto 0 auto;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: 30% auto 5% auto 30%; 
+    grid-template-rows: auto;
+    grid-template-areas:
+        ". wordlist . seed .";
+}
+
+#grid ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.3em;
+}
+
+#grid #seed {
+    grid-area: seed;
+    font-size: 32px;
+    text-align: center;
+    margin: auto 0 auto 0;
+}
+
+#grid #wordlist {
+    grid-area: wordlist;
+    text-align: left;
+}
+
+
+#grid button {
+    padding: 5px 5px;
+    min-width: 0px;
+}
+
+button {
+    background-color: rgba(0,0,0,0); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid #4CAF50;
+    transition: border 1s cubic-bezier(0.4, 0, 1, 1);
+    min-width: 250px;
+}
+
+button:hover {
+    border: 2px solid #2b5d2d;
+}
+
+button#submit {
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+button.issue {
+    font-size: 0.8em;
+    border-width: 1px;
+    border-color: #1b7591;
+    color: #bbb;
+    transition-property: color, background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+button.issue:hover {
+    background-color: #1b7591;
+    color: #333;
+}
+
+button.issue.selected {
+    background-color: #4d9264;
+    color: #333;
+}
+
+/* Mobile */
+@media only screen and (max-width: 480px) {
+
+    #grid {
+        display: grid;
+        grid-template-columns: auto auto auto; 
+        grid-template-rows: auto;
+        grid-template-areas:
+            ". seed. "
+            ". wordlist .";
+    }    
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/csv-js@1.0.0/csv.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="classes.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Evaluating Issues in Wordlists</title>
+  </head>
+  <body>
+      <div class="contain">
+        <div id="description">
+          <p>Read the stimulus word on the left, then read the related list on the right. Each word should be related to the stimulus.</p>
+          <p>Beside each word is 5 buttons representing issues you may find with that word. Click each issue you feel is relevant, then press "Next".</p>
+          <p>The potential issues are:
+            <ul>
+              <li><strong>U</strong>nrelated: The word has no apparent relation to the stimulus.</li>
+              <li><strong>S</strong>ynonomous: The word is synonymous with the stimulus.</li>
+              <li><strong>O</strong>bvious: The word has a very obvious relation (eg. compound word) <em>and</em> fails to stimulate new ideas.</li>
+              <li><strong>D</strong>ull: The word is boring, archaic, or meaningless, and fails to stimulate new ideas.</li>
+              <li><strong>Oth</strong>er: You feel the word is out of place, but does not fit into any of these categories.</li>
+            </ul>
+          </p>
+      </div>
+        <div id='grid'>
+            <div id='seed'>
+                <span id='seed-word'></span><br />
+                <button id="next" onclick='next();return false;'>Next</button>
+            </div>
+            
+            <ul id='wordlist'></ul>
+        </div>
+
+        <button id="submit" onclick='submit_data();return false;'>Click to Send Data</button><br />
+        <button id="export" onclick='export_csv();return false;'>Click to Download Data</button>
+    </div>
+  </body>
+</html>
