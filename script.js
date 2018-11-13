@@ -106,5 +106,4 @@ function export_csv() {
     link.setAttribute("download", "list_comparison_data.csv");
     document.body.appendChild(link);
     link.click()
-    trials = []
   }
