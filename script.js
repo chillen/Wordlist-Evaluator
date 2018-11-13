@@ -60,6 +60,8 @@ function buildWordlists(data, shuffle=false) {
         wordlists = wordlists.sort(function() { return 0.5 - Math.random() });
     }
 
+    // Sometimes they come in blank, because the CSV is too wide. So lets remove anything without a seed
+    wordlists = wordlists.filter(wordlist => wordlist.seed)
     return wordlists
 }
 var d = {}
