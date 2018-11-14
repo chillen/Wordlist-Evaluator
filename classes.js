@@ -65,7 +65,7 @@ class Wordlist {
     }
 
     getIssueButtons(word) {
-        let issues = ['U', 'S', 'O', 'D', 'Oth']
+        let issues = ['U', 'S', 'O', 'D', 'R', 'Oth']
         let html = ''
         for (let issue of issues) {
             html += `<button class='issue' id='${word}-${issue}' onclick='selectIssue("${word}", "${issue}");return false;'>${issue}</button>`
@@ -89,7 +89,7 @@ class Trial {
     constructor(wordlist) {
         this.wordlist = {}
         for (let word of wordlist.nearest) {
-            this.wordlist[word] = {'U': false, 'D': false, 'O': false, 'Oth': false}
+            this.wordlist[word] = {'U': false, 'D': false, 'O': false, 'R': false, 'Oth': false}
         }
         this.seed = wordlist.seed
         this.algorithm = wordlist.algorithm

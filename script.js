@@ -1,5 +1,6 @@
 
 var trials = []
+var trialHistory = []
 var wordlists = []
 var currentTrial = null
 var session = Math.random().toString(36).substring(7) // Random enough session key
@@ -70,7 +71,7 @@ function populateWordlists(shuffle=false) {
     return sheet.setupData().then(data => buildWordlists(data, shuffle))
 }
 
-function data_to_csv_string(meta=true, header=true) {
+function data_to_csv_string(trials, meta=true, header=true) {
     let rows = []
     let meta_text = meta?"data:text/csv;charset=utf-8":""
     if (header)
@@ -87,10 +88,13 @@ function submit_data() {
     let data = new FormData()
 
     data.append("session", session)
-    data.append("data", data_to_csv_string(meta=false, header=false))
+    // We want to use the recent cache of trials, not the full history, to avoid duplicate data in the DB
+    data.append("data", data_to_csv_string(trials, meta=false, header=false))
     fetch(scriptURL, { method: 'POST', mode: 'cors', body: data})
       .then(response => {
           swal("Sent Data", "Successfully sent out and cleared your data. Thanks for your help!", "success")
+          // Keep a full history of trials, but clear the cache so we don't send duplicates
+          trialHistory = trialHistory.concat(trials) 
           trials = []
         })
       .catch(error => {
@@ -100,8 +104,8 @@ function submit_data() {
 }
 
 function export_csv() {
-    // TODO - based on previous tester
-    let csv = data_to_csv_string()
+    // Use the entire trialHistory so local copies can have all of the data.
+    let csv = data_to_csv_string(trialHistory)
     var encodedUri = encodeURI(csv);
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
