@@ -53,6 +53,15 @@ body #description {
     min-width: 0px;
 }
 
+li.highlighted button {
+    border-color: #4CAF50;
+    border-width: 2px;
+}
+
+li.highlighted {
+    font-weight: bold;
+}
+
 button {
     background-color: rgba(0,0,0,0); /* Green */
     border: none;

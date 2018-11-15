@@ -4,15 +4,59 @@ var trialHistory = []
 var wordlists = []
 var currentTrial = null
 var session = Math.random().toString(36).substring(7) // Random enough session key
+var highlightedIndex = 0
+var issueLabels = ['U', 'S', 'O', 'D', 'R', 'Oth']
+var highlightedDiv = ''
 
 document.addEventListener('DOMContentLoaded', function () {
+    setupListeners()
     populateWordlists(true).then(wordlists => {
         let wordlist = selectWordList()
         currentTrial = new Trial(wordlist)
         displaySeed(wordlist.seed)
         displayList(wordlist)
+        changeHighlighted()
     }).catch(err => console.log(err))
 })
+
+function setupListeners() {
+    document.addEventListener('keyup', function (e) {
+        if (e.keyCode === 38) { // Up arrow
+          e.preventDefault()
+          highlightedIndex -= 1
+          if (highlightedIndex < 0) highlightedIndex = 9
+          changeHighlighted()
+        }
+        if (e.keyCode === 40) { // Down arrow
+          e.preventDefault()
+          highlightedIndex = (highlightedIndex+1) % 10
+          changeHighlighted()
+        }
+
+        if (e.keyCode >= 49 && e.keyCode <= 54) {
+            // Number keys, 1 == 49, 
+            let pressed = 6-(55 - e.keyCode)
+            toggleButton(pressed)
+        }
+      })
+}
+
+function changeHighlighted() {
+    console.log(highlightedIndex)
+    let newDiv = document.querySelectorAll('li.wordlist-word')[highlightedIndex]
+
+    if (highlightedDiv === '') {
+        highlightedDiv = newDiv
+        highlightedDiv.classList.toggle('highlighted')
+    }
+    highlightedDiv.classList.toggle('highlighted')
+    newDiv.classList.toggle('highlighted')
+    highlightedDiv = newDiv
+}
+
+function toggleButton(number) {
+    highlightedDiv.querySelectorAll('button.issue')[number].click()
+}
 
 function selectIssue(word, issue) {
     document.querySelector(`button#${word}-${issue}`).classList.toggle('selected')

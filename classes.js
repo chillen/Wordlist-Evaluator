@@ -76,7 +76,7 @@ class Wordlist {
     HTML(list) {
         let out = ''
         for (let word of list) {
-            out += `<li>${this.getIssueButtons(word)} ${word}</li>`
+            out += `<li class='wordlist-word'>${this.getIssueButtons(word)} ${word}</li>`
         }
         return out 
     }
