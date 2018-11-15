@@ -38,6 +38,12 @@ function setupListeners() {
             let pressed = 6-(55 - e.keyCode)
             toggleButton(pressed)
         }
+
+        if (e.keyCode === 32) { // Space
+            next()
+            highlightedIndex = 0
+            changeHighlighted()
+        } 
       })
 }
 
